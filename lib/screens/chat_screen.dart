@@ -105,6 +105,9 @@ class _ChatScreenState extends State<ChatScreen> {
               onSelected: (value) {
                 if (value == 'clear') {
                   chatProvider.clearChats();
+                  setState(() {
+                    _isAnimationStart = false;
+                  });
                 }
               },
               position: PopupMenuPosition.under,
@@ -199,7 +202,14 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                     Container(
-                      child: SpeechScreenWidget(textEditingController: textEditingController),
+                      child: SpeechScreenWidget(
+                          textEditingController: textEditingController,
+                          finishedCallback: () async {
+                            Future.delayed(Duration(milliseconds: 300), () async {
+                              await sendMessageFCT(modelsProvider: modelsProvider, chatProvider: chatProvider);
+                              textEditingController.clear();
+                            });
+                          }),
                     ),
                     Container(
                       child: Transform.rotate(

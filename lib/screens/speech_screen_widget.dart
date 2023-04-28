@@ -4,7 +4,8 @@ import 'package:avatar_glow/avatar_glow.dart';
 
 class SpeechScreenWidget extends StatefulWidget {
   TextEditingController textEditingController;
-  SpeechScreenWidget({super.key, required this.textEditingController});
+  Function? finishedCallback;
+  SpeechScreenWidget({super.key, required this.textEditingController, this.finishedCallback});
 
   @override
   State<SpeechScreenWidget> createState() => _SpeechScreenWidgetState();
@@ -40,6 +41,7 @@ class _SpeechScreenWidgetState extends State<SpeechScreenWidget> {
               setState(() {
                 isListening = false;
               });
+              widget.finishedCallback!();
             }
             setState(() {
               widget.textEditingController.text = result.recognizedWords;
