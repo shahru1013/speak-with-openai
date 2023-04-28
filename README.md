@@ -1,6 +1,6 @@
-# talk_to_me
+# Speak with openAI API
 
-A new Flutter project.
+A new Flutter project where you can easily communicate with OpenAI API by voice typing.
 
 ## Getting Started
 
