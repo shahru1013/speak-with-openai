@@ -19,6 +19,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   TextEditingController _keyInputController = TextEditingController();
   bool _isAddOpenKeyEnabled = false;
   bool _isLoading = false;
+  bool _obscureText = true;
 
   _doGetAPiKey() async {
     final prefs = await SharedPreferences.getInstance();
@@ -173,11 +174,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                   color: Color.fromARGB(239, 255, 253, 253),
                                   width: 220,
                                   child: TextFormField(
-                                    maxLines: null,
+                                    obscuringCharacter: '*',
+                                    obscureText: _obscureText,
+
+                                    // maxLines: null,
                                     controller: _keyInputController,
                                     decoration: InputDecoration(
                                       hintText: 'OpenAI API Key',
                                       focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _obscureText ? Icons.visibility_off : Icons.visibility,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),

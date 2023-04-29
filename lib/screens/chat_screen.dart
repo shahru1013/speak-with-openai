@@ -128,31 +128,6 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      floatingActionButton: _isAnimationStart
-          ? Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 150,
-                margin: EdgeInsets.only(bottom: 60),
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Stop generating',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  backgroundColor: Color.fromRGBO(0, 0, 0, 0.3),
-                  elevation: 2.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            )
-          : SizedBox(),
       body: SafeArea(
         child: Column(
           children: [
@@ -165,7 +140,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       msg: chatProvider.getChatList[index].msg, // chatList[index].msg,
                       chatIndex: chatProvider.getChatList[index].chatIndex, //chatList[index].chatIndex,
                       shouldAnimate: chatProvider.getChatList.length - 1 == index,
-                      animationCallback: _textAnimationCallback,
+                      size: chatProvider.getChatList.length,
+                      currentIndex: index,
+                      // animationCallback: _textAnimationCallback,
                     );
                   }),
             ),
